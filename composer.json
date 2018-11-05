@@ -1,7 +1,7 @@
 {
   "name": "wildphp/irc-textformatter",
   "description": "IRC Text Formatter for WildPHP",
-  "type": "project",
+  "type": "library",
   "license": "MIT",
   "require": {
     "php": ">=7.0.0"
