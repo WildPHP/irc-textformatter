@@ -1,11 +1,10 @@
 # irc-textformatter
-[![Build Status](https://scrutinizer-ci.com/g/WildPHP/irc-messages/badges/build.png)](https://scrutinizer-ci.com/g/WildPHP/irc-messages/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WildPHP/irc-messages/badges/quality-score.png)](https://scrutinizer-ci.com/g/WildPHP/irc-messages/?branch=master)
-[![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/WildPHP/irc-messages/badges/coverage.png)](https://scrutinizer-ci.com/g/WildPHP/irc-messages/code-structure/master/code-coverage)
-[![Latest Stable Version](https://poser.pugx.org/wildphp/irc-messages/v/stable)](https://packagist.org/packages/wildphp/irc-messages)
-[![Latest Unstable Version](https://poser.pugx.org/wildphp/irc-messages/v/unstable)](https://packagist.org/packages/wildphp/irc-messages)
-[![Total Downloads](https://poser.pugx.org/wildphp/irc-messages/downloads)](https://packagist.org/packages/wildphp/irc-messages)
-
+[![Build Status](https://scrutinizer-ci.com/g/WildPHP/irc-textformatter/badges/build.png)](https://scrutinizer-ci.com/g/WildPHP/irc-textformatter/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WildPHP/irc-textformatter/badges/quality-score.png)](https://scrutinizer-ci.com/g/WildPHP/irc-textformatter/?branch=master)
+[![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/WildPHP/irc-textformatter/badges/coverage.png)](https://scrutinizer-ci.com/g/WildPHP/irc-textformatter/code-structure/master/code-coverage)
+[![Latest Stable Version](https://poser.pugx.org/wildphp/irc-textformatter/v/stable)](https://packagist.org/packages/wildphp/irc-textformatter)
+[![Latest Unstable Version](https://poser.pugx.org/wildphp/irc-textformatter/v/unstable)](https://packagist.org/packages/wildphp/irc-textformatter)
+[![Total Downloads](https://poser.pugx.org/wildphp/irc-textformatter/downloads)](https://packagist.org/packages/wildphp/irc-textformatter)
 
 Tiny library to format text according to the IRC standard.
 
