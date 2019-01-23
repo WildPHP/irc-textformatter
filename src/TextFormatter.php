@@ -51,7 +51,7 @@ class TextFormatter
      *
      * @return string
      */
-    public static function bold(string $text)
+    public static function bold(string $text): string
     {
         return self::$asciiMap['bold'] . $text . self::$asciiMap['bold'];
     }
@@ -61,7 +61,7 @@ class TextFormatter
      *
      * @return string
      */
-    public static function italic(string $text)
+    public static function italic(string $text): string
     {
         return self::$asciiMap['italic'] . $text . self::$asciiMap['italic'];
     }
@@ -71,7 +71,7 @@ class TextFormatter
      *
      * @return string
      */
-    public static function underline(string $text)
+    public static function underline(string $text): string
     {
         return self::$asciiMap['underline'] . $text . self::$asciiMap['underline'];
     }
@@ -83,7 +83,7 @@ class TextFormatter
      *
      * @return string
      */
-    public static function color(string $text, string $foreground, string $background = '')
+    public static function color(string $text, string $foreground, string $background = ''): string
     {
         if (!is_numeric($foreground)) {
             $foreground = self::findColorByString($foreground);
@@ -176,7 +176,7 @@ class TextFormatter
      */
     public static function stripColor(string $text): string
     {
-        $regex = '/' . preg_quote(self::$asciiMap['color']) . '(\d{1,2},\d{1,2})?/';
+        $regex = '/' . preg_quote(self::$asciiMap['color'], '/') . '(\d{1,2},\d{1,2})?/';
         return preg_replace($regex, '', $text);
     }
 }
