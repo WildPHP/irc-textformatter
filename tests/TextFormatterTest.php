@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2019 The WildPHP Team
  *
@@ -6,12 +7,14 @@
  * See the LICENSE file for more information.
  */
 
+namespace WildPHP\TextFormatter\Tests;
+
 use PHPUnit\Framework\TestCase;
 use WildPHP\TextFormatter\TextFormatter;
 
 class TextFormatterTest extends TestCase
 {
-    public function testBold()
+    public function testBold(): void
     {
         $string = 'Test string';
         $expectedString = "\x02" . $string . "\x02";
@@ -21,7 +24,7 @@ class TextFormatterTest extends TestCase
         static::assertSame($expectedString, $actual);
     }
 
-    public function testUnderline()
+    public function testUnderline(): void
     {
         $string = 'Test string';
         $expectedString = "\x1F" . $string . "\x1F";
@@ -31,7 +34,7 @@ class TextFormatterTest extends TestCase
         static::assertSame($expectedString, $actual);
     }
 
-    public function testItalic()
+    public function testItalic(): void
     {
         $string = 'Test string';
         $expectedString = "\x09" . $string . "\x09";
@@ -41,7 +44,7 @@ class TextFormatterTest extends TestCase
         static::assertSame($expectedString, $actual);
     }
 
-    public function testColor()
+    public function testColor(): void
     {
         $string = 'Test string';
         $expectedString = "\x0306,04" . $string . "\x03";
@@ -53,60 +56,60 @@ class TextFormatterTest extends TestCase
         static::assertSame($expectedString, $actualNumeric);
     }
 
-	public function testCalculateStringColor()
-	{
-		$expected = 11;
-		$string = 'Test';
-		
-		self::assertEquals($expected, TextFormatter::calculateStringColor($string));
+    public function testCalculateStringColor(): void
+    {
+        $expected = 11;
+        $string = 'Test';
+
+        self::assertEquals($expected, TextFormatter::calculateStringColor($string));
     }
 
-	public function testConsistentStringColor()
-	{
-		$expected = "\x0311" . 'Test' . "\x03";
-		$string = 'Test';
-		
-		self::assertEquals($expected, TextFormatter::consistentStringColor($string));
-		self::assertEquals('', TextFormatter::consistentStringColor(''));
+    public function testConsistentStringColor(): void
+    {
+        $expected = "\x0311" . 'Test' . "\x03";
+        $string = 'Test';
+
+        self::assertEquals($expected, TextFormatter::consistentStringColor($string));
+        self::assertEquals('', TextFormatter::consistentStringColor(''));
     }
 
-	public function testStripBold()
-	{
-		$expectedString = 'Test string';
-		$string = "\x02" . $expectedString . "\x02";
+    public function testStripBold(): void
+    {
+        $expectedString = 'Test string';
+        $string = "\x02" . $expectedString . "\x02";
 
-		$actual = TextFormatter::stripBold($string);
+        $actual = TextFormatter::stripBold($string);
 
-		static::assertSame($expectedString, $actual);
-	}
+        static::assertSame($expectedString, $actual);
+    }
 
-	public function testStripUnderline()
-	{
-		$expectedString = 'Test string';
-		$string = "\x1F" . $expectedString . "\x1F";
+    public function testStripUnderline(): void
+    {
+        $expectedString = 'Test string';
+        $string = "\x1F" . $expectedString . "\x1F";
 
-		$actual = TextFormatter::stripUnderline($string);
+        $actual = TextFormatter::stripUnderline($string);
 
-		static::assertSame($expectedString, $actual);
-	}
+        static::assertSame($expectedString, $actual);
+    }
 
-	public function testStripItalic()
-	{
-		$expectedString = 'Test string';
-		$string = "\x09" . $expectedString . "\x09";
+    public function testStripItalic(): void
+    {
+        $expectedString = 'Test string';
+        $string = "\x09" . $expectedString . "\x09";
 
-		$actual = TextFormatter::stripItalic($string);
+        $actual = TextFormatter::stripItalic($string);
 
-		static::assertSame($expectedString, $actual);
-	}
+        static::assertSame($expectedString, $actual);
+    }
 
-	public function testStripColor()
-	{
-		$expectedString = 'Test string';
-		$string = "\x0306,04" . $expectedString . "\x03";
+    public function testStripColor(): void
+    {
+        $expectedString = 'Test string';
+        $string = "\x0306,04" . $expectedString . "\x03";
 
-		$actual = TextFormatter::stripColor($string);
+        $actual = TextFormatter::stripColor($string);
 
-		static::assertSame($expectedString, $actual);
-	}
+        static::assertSame($expectedString, $actual);
+    }
 }

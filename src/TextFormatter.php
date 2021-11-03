@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2019 The WildPHP Team
  *
@@ -8,12 +9,11 @@
 
 namespace WildPHP\TextFormatter;
 
-
 class TextFormatter
 {
     // It is required that the numbers are represented as strings (for leading zeroes).
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected static $colorMap = [
         'white' => '00',
@@ -35,7 +35,7 @@ class TextFormatter
     ];
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected static $asciiMap = [
         'bold' => "\x02",
@@ -46,44 +46,34 @@ class TextFormatter
         'color' => "\x03"
     ];
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function bold(string $text): string
     {
         return self::$asciiMap['bold'] . $text . self::$asciiMap['bold'];
     }
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function italic(string $text): string
     {
         return self::$asciiMap['italic'] . $text . self::$asciiMap['italic'];
     }
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function underline(string $text): string
     {
         return self::$asciiMap['underline'] . $text . self::$asciiMap['underline'];
     }
 
+    public static function wrapInColorDelimiters(string $text): string
+    {
+        return self::$asciiMap['color'] . $text . self::$asciiMap['color'];
+    }
+
     /**
-     * @param string $text
-     * @param string $foreground
-     * @param string $background
+     * @param  string  $text
+     * @param  int|string  $foreground
+     * @param  int|string  $background
      *
      * @return string
      */
-    public static function color(string $text, string $foreground, string $background = ''): string
+    public static function color(string $text, $foreground, $background = ''): string
     {
         if (!is_numeric($foreground)) {
             $foreground = self::findColorByString($foreground);
@@ -93,26 +83,16 @@ class TextFormatter
             $background = self::findColorByString($background);
         }
 
-        return self::$asciiMap['color'] . $foreground . (!empty($background) ? ',' . $background : '') . $text . self::$asciiMap['color'];
+        return self::wrapInColorDelimiters($foreground . (!empty($background) ? ',' . $background : '') . $text);
     }
 
-    /**
-     * @param string $color
-     *
-     * @return string
-     */
     public static function findColorByString(string $color): string
     {
         $color = strtolower($color);
         return self::$colorMap[$color] ?? '';
     }
 
-    /**
-     * @param string $stringToColor
-     *
-     * @return string
-     */
-    public static function calculateStringColor(string $stringToColor): string
+    public static function calculateStringColor(string $stringToColor): int
     {
         $num = 0;
         foreach (str_split($stringToColor) as $char) {
@@ -122,12 +102,6 @@ class TextFormatter
         return abs($num) % (count(self::$colorMap) - 1);
     }
 
-    /**
-     * @param string $stringToColor
-     * @param string $background
-     *
-     * @return string
-     */
     public static function consistentStringColor(string $stringToColor, string $background = ''): string
     {
         // Don't even bother.
@@ -139,44 +113,24 @@ class TextFormatter
         return self::color($stringToColor, $color, $background);
     }
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function stripBold(string $text): string
     {
         return str_replace(self::$asciiMap['bold'], '', $text);
     }
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function stripItalic(string $text): string
     {
         return str_replace(self::$asciiMap['italic'], '', $text);
     }
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function stripUnderline(string $text): string
     {
         return str_replace(self::$asciiMap['underline'], '', $text);
     }
 
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
     public static function stripColor(string $text): string
     {
         $regex = '/' . preg_quote(self::$asciiMap['color'], '/') . '(\d{1,2},\d{1,2})?/';
-        return preg_replace($regex, '', $text);
+        return preg_replace($regex, '', $text) ?? $text;
     }
 }
